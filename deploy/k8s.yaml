@@ -177,7 +177,7 @@ spec:
         env:
         - name: CSI_ENDPOINT
           value: unix:///var/lib/csi/sockets/pluginproxy/csi.sock
-        image: juicedata/juicefs-csi-driver
+        image: juicedata/juicefs-csi-driver:temp-debug-0
         livenessProbe:
           failureThreshold: 5
           httpGet:

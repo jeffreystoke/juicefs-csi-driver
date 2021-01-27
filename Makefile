@@ -23,6 +23,7 @@ PKG=github.com/juicedata/juicefs-csi-driver
 LDFLAGS?="-X ${PKG}/pkg/driver.driverVersion=${VERSION} -X ${PKG}/pkg/driver.gitCommit=${GIT_COMMIT} -X ${PKG}/pkg/driver.buildDate=${BUILD_DATE} -s -w"
 GO111MODULE=on
 IMAGE_VERSION_ANNOTATED=$(IMAGE):$(VERSION)-juicefs$(shell docker run --entrypoint=juicefs $(IMAGE):$(VERSION) version | cut -d' ' -f3)
+TEMP_DEBUG_TAG=temp-debug-0
 
 .PHONY: juicefs-csi-driver
 juicefs-csi-driver:
@@ -41,14 +42,21 @@ test:
 test-sanity:
 	go test -v ./tests/sanity/...
 
-.PHONY: image
+.PHONY: image image-temp-debug
 image:
 	docker build -t $(IMAGE):latest .
 
-.PHONY: push
+image-temp-debug:
+	docker build -t $(IMAGE):$(TEMP_DEBUG_TAG) .
+
+.PHONY: push push-temp-debug
 push:
 	docker tag $(IMAGE):latest $(REGISTRY)/$(IMAGE):latest
 	docker push $(REGISTRY)/$(IMAGE):latest
+
+push-temp-debug:
+	docker tag $(IMAGE):$(TEMP_DEBUG_TAG) $(REGISTRY)/$(IMAGE):$(TEMP_DEBUG_TAG)
+	docker push $(REGISTRY)/$(IMAGE):$(TEMP_DEBUG_TAG)
 
 .PHONY: image-branch
 image-branch:

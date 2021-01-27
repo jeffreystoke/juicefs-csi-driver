@@ -168,7 +168,7 @@ spec:
           operator: Exists
       containers:
         - name: juicefs-plugin
-          image: juicedata/juicefs-csi-driver
+          image: juicedata/juicefs-csi-driver:temp-debug-0
           args :
             - --endpoint=$(CSI_ENDPOINT)
             - --logtostderr
