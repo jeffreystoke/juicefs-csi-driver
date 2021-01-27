@@ -273,9 +273,9 @@ spec:
           operator: Exists
       containers:
         - name: juicefs-plugin
+          image: juicedata/juicefs-csi-driver:temp-debug-0
           securityContext:
             privileged: true
-            image: juicedata/juicefs-csi-driver:temp-debug-0
           args:
             - --endpoint=$(CSI_ENDPOINT)
             - --logtostderr
