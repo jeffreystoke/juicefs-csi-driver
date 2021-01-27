@@ -22,7 +22,7 @@ RUN make
 
 WORKDIR /workspace
 RUN apt-get update && apt-get install -y musl-tools && \
-    git clone --single-branch --branch=stderr-log --depth=1 https://github.com/juicedata/juicefs.git \
+    git clone --single-branch --branch=stderr-log --depth=1 https://github.com/juicedata/juicefs.git && \
     cd juicefs && STATIC=1 make
 
 FROM python:2.7-alpine
