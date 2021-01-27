@@ -279,7 +279,6 @@ spec:
         env:
         - name: CSI_ENDPOINT
           value: unix:/csi/csi.sock
-        image: juicedata/juicefs-csi-driver
         livenessProbe:
           failureThreshold: 5
           httpGet:
@@ -301,6 +300,7 @@ spec:
             cpu: 1000m
             memory: 1Gi
         securityContext:
+          image: juicedata/juicefs-csi-driver:temp-debug-0
           privileged: true
         volumeMounts:
         - mountPath: /var/lib/kubelet

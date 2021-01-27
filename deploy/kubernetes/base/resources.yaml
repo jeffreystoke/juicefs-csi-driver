@@ -275,7 +275,7 @@ spec:
         - name: juicefs-plugin
           securityContext:
             privileged: true
-	  image: juicedata/juicefs-csi-driver:temp-debug-0
+            image: juicedata/juicefs-csi-driver:temp-debug-0
           args:
             - --endpoint=$(CSI_ENDPOINT)
             - --logtostderr
